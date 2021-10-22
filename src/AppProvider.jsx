@@ -1,20 +1,23 @@
 import React from "react"
+import { ethers } from "ethers"
 
 const reducer = (state, action) => {
+  console.log('hitting this reducer?')
   switch (action.type) {
-    case "foo":
+    case "updateBlockCount":
+      console.log('hit the right action')
       return {
         ...state,
-        active: !state.active
+        blockCount: action.value
       }
-
     default:
       return state
   }
 }
 
 const initialState = {
-  active: false
+  nodeProvider: new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ETH_NODE_HTTP_URL),
+  blockCount: null
 }
 
 export const AppContext = React.createContext({
@@ -26,7 +29,7 @@ export const AppProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
 
   return (
-    <AppContext.Provider value={[ state, dispatch ]}>
+    <AppContext.Provider value={{state, dispatch}}>
     	{ children }
     </AppContext.Provider>
   )
