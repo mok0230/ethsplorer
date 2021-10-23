@@ -21,7 +21,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import { AppContext } from "./AppProvider";
-import { updateBlockCount } from "./utils";
+import { initializeBlockData } from "./utils";
 import ethereumLogo from './ethereum-eth-logo.svg'
 
 function Copyright(props: any) {
@@ -208,8 +208,8 @@ export default function Dashboard() {
   const { state, dispatch } = React.useContext(AppContext) as any;
 
   React.useEffect(() => {
-    console.log('useEffect should only run once')
-    updateBlockCount(state, dispatch);
+    console.log('useEffect should only run once');
+    initializeBlockData(state, dispatch)
   }, []);
 
   return <DashboardContent />;

@@ -10,6 +10,13 @@ const reducer = (state, action) => {
         ...state,
         blockCount: action.value
       }
+    case "addBlock":
+      console.log('addBlock')
+      console.log('what is state?', state)
+      return {
+        ...state,
+        blocks: [...state.blocks, action.value]
+      }
     default:
       return state
   }
@@ -17,7 +24,8 @@ const reducer = (state, action) => {
 
 const initialState = {
   nodeProvider: new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ETH_NODE_HTTP_URL),
-  blockCount: null
+  blockCount: null,
+  blocks: []
 }
 
 export const AppContext = React.createContext({
