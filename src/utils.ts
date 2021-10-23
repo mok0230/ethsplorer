@@ -1,13 +1,9 @@
-import { BigNumber } from "@ethersproject/bignumber";
-
 export const initializeBlockData = async (state: any, dispatch: any) => {
   const blockCount = await updateBlockCount(state, dispatch);
 
-  await addBlock(state, dispatch, blockCount);
-
-  // for (let i = blockCount; i > blockCount - 10; i--) {
-  //   await addBlock();
-  // }
+  for (let i = blockCount; i > blockCount - 10; i--) {
+    await addBlock(state, dispatch, i);
+  }
   
 }
 
