@@ -1,3 +1,5 @@
+import { BigNumber } from "@ethersproject/bignumber";
+
 export const initializeBlockData = async (state: any, dispatch: any) => {
   const blockCount = await updateBlockCount(state, dispatch);
 
@@ -31,6 +33,18 @@ const addBlock = async (state: any, dispatch: any, blockNumber: number): Promise
   });
 
   return true;
+}
+
+export const generateBlockTableData = (state: any) => {
+  return state.blocks.map((block: any) => {
+    return {
+      blockNum: block.number,
+      timestamp: block.timestamp,
+      txCount: block.transactions.length,
+      gasLimit: block.gasLimit.toNumber().toLocaleString("en-US"),
+      gasUsed: block.gasUsed.toNumber().toLocaleString("en-US")
+    }
+  })
 }
 
 
