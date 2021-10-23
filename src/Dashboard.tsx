@@ -21,6 +21,8 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import { AppContext } from "./AppProvider";
+import { updateBlockCount } from "./utils";
 
 function Copyright(props: any) {
   return (
@@ -206,5 +208,12 @@ function DashboardContent() {
 }
 
 export default function Dashboard() {
+  const { state, dispatch } = React.useContext(AppContext) as any;
+
+  React.useEffect(() => {
+    console.log('useEffect should only run once')
+    updateBlockCount(state, dispatch);
+  }, []);
+
   return <DashboardContent />;
 }

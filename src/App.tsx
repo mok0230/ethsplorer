@@ -1,14 +1,11 @@
 import './App.css';
-import { AppProvider } from "./AppProvider"
-import BlockTable from "./BlockTable"
 import Dashboard from './Dashboard';
+import { AppProvider } from './AppProvider'
 
 function App() {
-
   return (
     <AppProvider>
       <Dashboard></Dashboard>
-      <BlockTable></BlockTable>
     </AppProvider>
   );
 }
