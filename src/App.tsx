@@ -1,14 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { AppProvider } from "./AppProvider"
-import { AppContext } from "./AppProvider"
 import BlockTable from "./BlockTable"
+import Dashboard from './Dashboard';
 
 function App() {
 
   return (
     <AppProvider>
+      <Dashboard></Dashboard>
       <BlockTable></BlockTable>
     </AppProvider>
   );
