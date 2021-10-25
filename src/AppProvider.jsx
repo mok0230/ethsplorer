@@ -5,10 +5,16 @@ const reducer = (state, action) => {
   console.log('hitting this reducer?')
   switch (action.type) {
     case "updateBlockCount":
-      console.log('hit the right action')
+      console.log('updateBlockCount')
       return {
         ...state,
         blockCount: action.value
+      }
+    case "updateGasPrice":
+      console.log('updateGasPrice')
+      return {
+        ...state,
+        gasPrice: action.value
       }
     case "addBlock":
       console.log('addBlock')
@@ -25,6 +31,7 @@ const reducer = (state, action) => {
 const initialState = {
   nodeProvider: new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ETH_NODE_HTTP_URL),
   blockCount: null,
+  gasPrice: null,
   blocks: []
 }
 

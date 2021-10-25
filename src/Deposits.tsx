@@ -15,6 +15,9 @@ export default function Deposits() {
       <Typography component="p" variant="h4">
         {state.blockCount}
       </Typography>
+      {state.gasPrice && <Typography color="text.secondary" sx={{ flex: 1 }}>
+        Current gas price: {state.gasPrice.toString()}
+      </Typography>}
     </React.Fragment>
   );
 }

@@ -1,10 +1,10 @@
 export const initializeBlockData = async (state: any, dispatch: any) => {
   const blockCount = await updateBlockCount(state, dispatch);
+  updateGasPrice(state, dispatch);
 
   for (let i = blockCount; i > blockCount - 10; i--) {
     await addBlock(state, dispatch, i);
   }
-  
 }
 
 const updateBlockCount = async (state: any, dispatch: any): Promise<number> => {
@@ -17,6 +17,18 @@ const updateBlockCount = async (state: any, dispatch: any): Promise<number> => {
   });
 
   return blockCount;
+}
+
+const updateGasPrice = async (state: any, dispatch: any): Promise<number> => {
+  const gasPrice = await state.nodeProvider.getGasPrice();
+  console.log('gasPrice', gasPrice);
+
+  dispatch({
+    type: 'updateGasPrice',
+    value: gasPrice
+  });
+
+  return gasPrice;
 }
 
 const addBlock = async (state: any, dispatch: any, blockNumber: number): Promise<boolean> => {
@@ -66,11 +78,6 @@ export const generateBlockTableData = (state: any) => {
 
 // ** Blockchain Status **
 
-// prototype . getBlockNumber ( )
-// Returns a Promise with the latest block number (as a Number).
-// prototype . getGasPrice ( )
-// Returns a Promise with the current gas price (as a BigNumber).
-// prototype . getBlock ( blockHashOrBlockNumber )
 // Returns a Promise with the block at blockHashorBlockNumber. (See: Block Responses)
 // prototype . getTransaction ( transactionHash )
 // Returns a Promise with the transaction with transactionHash. (See: Transaction Responses)
