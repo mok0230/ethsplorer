@@ -16,7 +16,7 @@ export default function Deposits() {
         {state.blockCount}
       </Typography>
       {state.gasPrice && <Typography color="text.secondary" sx={{ flex: 1 }}>
-        Current gas price: {state.gasPrice.toString()}
+        Current gas price: {state.gasPrice.toNumber().toLocaleString('en-US')}
       </Typography>}
     </React.Fragment>
   );
