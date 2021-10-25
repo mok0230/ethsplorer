@@ -19,7 +19,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import CurrentBlock from './CurrentBlock';
-import Orders from './Orders';
+import BlockTable from './BlockTable';
 import { AppContext } from "./AppProvider";
 import { initializeBlockData } from "./utils";
 import ethereumLogo from './ethereum-eth-logo.svg'
@@ -189,10 +189,10 @@ function DashboardContent() {
                   <CurrentBlock />
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
+              {/* BlockTable */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <BlockTable />
                 </Paper>
               </Grid>
             </Grid>
