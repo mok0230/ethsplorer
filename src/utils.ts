@@ -7,6 +7,8 @@ export const initializeBlockData = async (state: any, dispatch: any) => {
   for (let i = blockCount; i > blockCount - 10; i--) {
     await addBlock(state, dispatch, i);
   }
+
+  dispatch("confirmDataInitialized");
 }
 
 const updateBlockCount = async (state: any, dispatch: any): Promise<number> => {

@@ -23,6 +23,11 @@ const reducer = (state, action) => {
         ...state,
         blocks: [...state.blocks, action.value]
       }
+    case "confirmDataInitialized":
+      return {
+        ...state,
+        isDataInitialized: true
+      }
     default:
       return state
   }
@@ -32,7 +37,8 @@ const initialState = {
   nodeProvider: new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ETH_NODE_HTTP_URL),
   blockCount: null,
   gasPrice: null,
-  blocks: []
+  blocks: [],
+  isDataInitialized: false
 }
 
 export const AppContext = React.createContext({
