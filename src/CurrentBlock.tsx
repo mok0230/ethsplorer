@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Title from './Title';
 import { AppContext } from "./AppProvider"
 
-export default function Deposits() {
+export default function CurrentBlock() {
   const { state } = React.useContext(AppContext) as any;
 
   console.log('when is this rendered?');
@@ -11,7 +11,7 @@ export default function Deposits() {
 
   return (
     <React.Fragment>
-      <Title>Total Blocks</Title>
+      <Title>Current Block Number</Title>
       <Typography component="p" variant="h4">
         {state.blockCount}
       </Typography>

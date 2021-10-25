@@ -18,7 +18,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
-import Deposits from './Deposits';
+import CurrentBlock from './CurrentBlock';
 import Orders from './Orders';
 import { AppContext } from "./AppProvider";
 import { initializeBlockData } from "./utils";
@@ -176,7 +176,7 @@ function DashboardContent() {
                   <Chart />
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+              {/* Current block */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -186,7 +186,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
+                  <CurrentBlock />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
