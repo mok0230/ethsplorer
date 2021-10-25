@@ -1,8 +1,5 @@
 # TODO
 
-- Rename components
-- Show current gas price
-- Update graph with gas limit/gas used
 - Add listener for blocks
 - Try using websocket
 - Clicking on account opens dialog or something

@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const initializeBlockData = async (state: any, dispatch: any) => {
   const blockCount = await updateBlockCount(state, dispatch);
   updateGasPrice(state, dispatch);
@@ -44,10 +46,12 @@ const addBlock = async (state: any, dispatch: any, blockNumber: number): Promise
 }
 
 export const generateBlockTableData = (state: any) => {
+  if (!state.blocks || !state.blocks.length) return [];
+
   return state.blocks.map((block: any) => {
     return {
       blockNum: block.number,
-      timestamp: block.timestamp,
+      timestamp: dayjs.unix(block.timestamp).format('h:mm:ss'),
       txCount: block.transactions.length,
       gasLimit: block.gasLimit.toNumber().toLocaleString("en-US"),
       gasUsed: block.gasUsed.toNumber().toLocaleString("en-US")
@@ -55,6 +59,17 @@ export const generateBlockTableData = (state: any) => {
   })
 }
 
+export const generateChartData = (state: any) => {
+  if (!state.blocks || !state.blocks.length) return [];
+
+  return state.blocks.map((block: any) => {
+    return {
+      timestamp: dayjs.unix(block.timestamp).format('h:mm:ss'),
+      // timestamp: block.timestamp.toString().slice(block.timestamp.toString().length - 1),
+      gasUsed: block.gasUsed.toNumber() / (10 ** 6)
+    }
+  })
+}
 
 // Available methods:
 
