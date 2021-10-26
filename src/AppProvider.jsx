@@ -36,16 +36,6 @@ const reducer = (state, action) => {
         ...state,
         blocks: [action.value, ...state.blocks]
       }
-    case "cacheNewlyMinedBlockNumber":
-      return {
-        ...state,
-        newlyMinedBlockNumbers: [...state.newlyMinedBlockNumbers, action.value]
-      }
-    case "removeFirstItemFromNewlyMinedBlockCache":
-      return {
-        ...state,
-        newlyMinedBlockNumbers: [...state.newlyMinedBlockNumbers.slice(1)]
-      }
     default:
       return state
   }
@@ -53,12 +43,10 @@ const reducer = (state, action) => {
 
 const initialState = {
   nodeProvider: new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ETH_NODE_HTTP_URL),
-  // nodeWebSocket: new WebSocket(process.env.REACT_APP_ETH_NODE_WSS_URL),
   blockCount: null,
   minBlockNum: null,
   gasPrice: null,
-  blocks: [],
-  newlyMinedBlockNumbers: []
+  blocks: []
 }
 
 export const AppContext = React.createContext({
