@@ -1,7 +1,5 @@
 # TODO
 
--Reloads don't clear data and then we get key error
-
 - Cache full block data that comes in from ws and then grab that instead of the API call if possible in updateBlocks
 - Clicking on account opens dialog or something
 - Show account balance in account UI

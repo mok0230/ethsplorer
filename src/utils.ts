@@ -4,7 +4,7 @@ export const initializeBlockData = async (state: any, dispatch: any) => {
   const maxBlockNum = await updateMaxBlockNum(state, dispatch);
 
   // initialize first block
-  await addBlock(state, dispatch, maxBlockNum, "pushBlock");
+  if (!state.blocks.length) await addBlock(state, dispatch, maxBlockNum, "pushBlock");
 
   updateMinBlockNum(dispatch, maxBlockNum);
   updateGasPrice(state, dispatch);
