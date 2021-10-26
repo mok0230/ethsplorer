@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 
 export const initializeBlockData = async (state: any, dispatch: any) => {
-  const blockCount = await updateBlockCount(state, dispatch);
+  const maxBlockNum = await updateMaxBlockNum(state, dispatch);
 
   // initialize first block
-  await addBlock(state, dispatch, blockCount, "pushBlock");
+  await addBlock(state, dispatch, maxBlockNum, "pushBlock");
 
-  updateMinBlockNum(dispatch, blockCount);
+  updateMinBlockNum(dispatch, maxBlockNum);
   updateGasPrice(state, dispatch);
 
   openWebSocketConnection(state, dispatch);
@@ -23,21 +23,21 @@ const openWebSocketConnection = async (state: any, dispatch: any) => {
     console.log('message received');
     const parsedMessage = JSON.parse(evt.data);
     if (parsedMessage.params && parsedMessage.params.result) {
-      dispatch({ type: "updateBlockCount", value: parseInt(parsedMessage.params.result.number, 16) })
+      dispatch({ type: "updateMaxBlockNum", value: parseInt(parsedMessage.params.result.number, 16) })
     }
   };
 }
 
-const updateBlockCount = async (state: any, dispatch: any): Promise<number> => {
-  const blockCount = await state.nodeProvider.getBlockNumber();
-  console.log('blockCount', blockCount);
+const updateMaxBlockNum = async (state: any, dispatch: any): Promise<number> => {
+  const maxBlockNum = await state.nodeProvider.getBlockNumber();
+  console.log('maxBlockNum', maxBlockNum);
 
   dispatch({
-    type: 'updateBlockCount',
-    value: blockCount
+    type: 'updateMaxBlockNum',
+    value: maxBlockNum
   });
 
-  return blockCount;
+  return maxBlockNum;
 }
 
 const updateMinBlockNum = (dispatch: any, currentBlockNum: number): number => {
@@ -58,7 +58,7 @@ export const updateGasPrice = async (state: any, dispatch: any): Promise<number>
   return gasPrice;
 }
 
-export const updateBlocks = async (state: any, dispatch: any, minBlockNum: number, blockCount: number, existingBlocks: any[]) => {
+export const updateBlocks = async (state: any, dispatch: any, minBlockNum: number, maxBlockNum: number, existingBlocks: any[]) => {
   console.log('updateBlocks');
   console.log('existingBlocks', existingBlocks);
   let minBlockNumFetched = existingBlocks[0].number;
@@ -73,7 +73,7 @@ export const updateBlocks = async (state: any, dispatch: any, minBlockNum: numbe
   }
   
 
-  while (maxBlockNumFetched < blockCount) {
+  while (maxBlockNumFetched < maxBlockNum) {
     const pushBlockNum = maxBlockNumFetched + 1;
     await addBlock(state, dispatch, pushBlockNum, 'pushBlock')
     maxBlockNumFetched = pushBlockNum;

@@ -4,14 +4,14 @@ import { ethers } from "ethers"
 const reducer = (state, action) => {
   console.log('hitting this reducer?')
   switch (action.type) {
-    case "updateBlockCount":
-      console.log('updateBlockCount');
+    case "updateMaxBlockNum":
+      console.log('updateMaxBlockNum');
       return {
         ...state,
-        blockCount: action.value
+        maxBlockNum: action.value
       }
     case "updateMinBlockNum":
-      console.log('updateBlockCount');
+      console.log('updateMaxBlockNum');
       return {
         ...state,
         minBlockNum: action.value
@@ -43,7 +43,7 @@ const reducer = (state, action) => {
 
 const initialState = {
   nodeProvider: new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ETH_NODE_HTTP_URL),
-  blockCount: null,
+  maxBlockNum: null,
   minBlockNum: null,
   gasPrice: null,
   blocks: []
