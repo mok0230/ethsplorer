@@ -7,12 +7,10 @@ import { updateGasPrice, updateBlocks } from "./utils"
 export default function CurrentBlock() {
   const { state, dispatch } = React.useContext(AppContext) as any;
   React.useEffect(() => {
-    updateGasPrice(state, dispatch);
-    if (state.blocks && state.blocks.length && state.minBlockNum) {
+    if (!state.areBlocksUpdating && state.blocks && state.blocks.length && state.minBlockNum) {
       updateBlocks(state, dispatch, state.minBlockNum, state.maxBlockNum, state.blocks);
     }
-    
-    // TODO: update block source data if necessary
+    updateGasPrice(state, dispatch);
   }, [state.maxBlockNum, state.minBlockNum]);
 
   return (

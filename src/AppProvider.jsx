@@ -36,6 +36,11 @@ const reducer = (state, action) => {
         ...state,
         blocks: [action.value, ...state.blocks]
       }
+    case "setAreBlocksUpdating":
+      return {
+        ...state,
+        areBlocksUpdating: action.value
+      }
     default:
       return state
   }
@@ -46,7 +51,8 @@ const initialState = {
   maxBlockNum: null,
   minBlockNum: null,
   gasPrice: null,
-  blocks: []
+  blocks: [],
+  areBlocksUpdating: false
 }
 
 export const AppContext = React.createContext({
