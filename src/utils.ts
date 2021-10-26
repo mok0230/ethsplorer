@@ -62,7 +62,7 @@ export const updateBlocks = async (state: any, dispatch: any, minBlockNum: numbe
   console.log("existingBlocks", existingBlocks);
 
 
-  dispatch("setAreBlocksUpdating", true);
+  dispatch({type: "setAreBlocksUpdating", value: true });
 
   let minBlockNumFetched = existingBlocks[0].number;
   let maxBlockNumFetched = existingBlocks[existingBlocks.length - 1].number;
@@ -84,7 +84,7 @@ export const updateBlocks = async (state: any, dispatch: any, minBlockNum: numbe
     maxBlockNumFetched = pushBlockNum;
   }
 
-  dispatch("setAreBlocksUpdating", false);
+  dispatch({ type: "setAreBlocksUpdating", value: false });
 }
 
 const addBlock = async (state: any, dispatch: any, blockNumber: number, dispatchType: 'pushBlock' | 'unshiftBlock'): Promise<any> => {
