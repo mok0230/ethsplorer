@@ -9,13 +9,14 @@ import Title from './Title';
 import { AppContext } from "./AppProvider";
 import { generateBlockTableData } from "./utils";
 
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
-
 export default function BlockTable() {
-  const { state } = React.useContext(AppContext) as any;
+  const { state, dispatch } = React.useContext(AppContext) as any;
   const rows = generateBlockTableData(state);
+
+  const handleLoadMoreBlocks = () => {
+    console.log('handleLoadMoreBlocks')
+    dispatch({ type: "updateMinBlockNum", value: state.minBlockNum - 10 });
+  }
 
   return (
     <React.Fragment>
@@ -42,8 +43,8 @@ export default function BlockTable() {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more blocks
+      <Link color="primary" href="#" onClick={handleLoadMoreBlocks} sx={{ mt: 3 }}>
+        Load more blocks
       </Link>
     </React.Fragment>
   );
