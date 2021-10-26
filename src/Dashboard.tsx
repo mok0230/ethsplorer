@@ -201,8 +201,7 @@ export default function Dashboard() {
   const { state, dispatch } = React.useContext(AppContext) as any;
 
   React.useEffect(() => {
-    console.log('useEffect should only run once');
-    initializeBlockData(state, dispatch)
+    initializeBlockData(state, dispatch);
   }, []);
 
   return <DashboardContent />;

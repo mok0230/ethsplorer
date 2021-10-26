@@ -4,11 +4,10 @@ export const initializeBlockData = async (state: any, dispatch: any) => {
   const blockCount = await updateBlockCount(state, dispatch);
 
   // initialize first block
-  const initBlockData = addBlock(state, dispatch, blockCount, "pushBlock");
+  await addBlock(state, dispatch, blockCount, "pushBlock");
 
-  const minBlockNum = updateMinBlockNum(dispatch, blockCount);
+  updateMinBlockNum(dispatch, blockCount);
   updateGasPrice(state, dispatch);
-  updateBlocks(state, dispatch, minBlockNum, blockCount, [initBlockData]);
 
   openWebSocketConnection(state, dispatch);
 }
@@ -60,21 +59,30 @@ export const updateGasPrice = async (state: any, dispatch: any): Promise<number>
 }
 
 export const updateBlocks = async (state: any, dispatch: any, minBlockNum: number, blockCount: number, existingBlocks: any[]) => {
+  console.log('updateBlocks');
+  console.log('existingBlocks', existingBlocks);
   let minBlockNumFetched = existingBlocks[0].number;
   let maxBlockNumFetched = existingBlocks[existingBlocks.length - 1].number;
 
   while (minBlockNumFetched > minBlockNum) {
-    minBlockNumFetched -= 1;
-    await addBlock(state, dispatch, minBlockNumFetched, 'unshiftBlock')
+    const unshiftBlockNum = minBlockNumFetched - 1
+    console.log('minBlockNumFetched', minBlockNumFetched);
+    console.log('minBlockNum', minBlockNum)
+    await addBlock(state, dispatch, unshiftBlockNum, 'unshiftBlock')
+    minBlockNumFetched = unshiftBlockNum;
   }
+  
 
   while (maxBlockNumFetched < blockCount) {
-    maxBlockNumFetched += 1;
-    await addBlock(state, dispatch, maxBlockNumFetched, 'pushBlock')
+    const pushBlockNum = maxBlockNumFetched + 1;
+    await addBlock(state, dispatch, pushBlockNum, 'pushBlock')
+    maxBlockNumFetched = pushBlockNum;
   }
 }
 
 const addBlock = async (state: any, dispatch: any, blockNumber: number, dispatchType: 'pushBlock' | 'unshiftBlock'): Promise<any> => {
+  console.log('addBlock');
+  console.log('blockNumber', blockNumber)
   const blockData = await state.nodeProvider.getBlock(blockNumber);
   console.log('blockData', blockData);
 

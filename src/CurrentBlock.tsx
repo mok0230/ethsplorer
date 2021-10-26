@@ -8,7 +8,7 @@ export default function CurrentBlock() {
   const { state, dispatch } = React.useContext(AppContext) as any;
   React.useEffect(() => {
     updateGasPrice(state, dispatch);
-    if (state.blocks && state.blocks.length) {
+    if (state.blocks && state.blocks.length && state.minBlockNum) {
       updateBlocks(state, dispatch, state.minBlockNum, state.blockCount, state.blocks);
     }
     
