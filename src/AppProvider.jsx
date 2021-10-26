@@ -46,12 +46,6 @@ const reducer = (state, action) => {
         ...state,
         newlyMinedBlockNumbers: [...state.newlyMinedBlockNumbers.slice(1)]
       }
-    case "confirmDataInitialized":
-      console.log('zzz confirming data is now initialized')
-      return {
-        ...state,
-        isDataInitialized: true
-      }
     default:
       return state
   }
@@ -64,7 +58,6 @@ const initialState = {
   minBlockNum: null,
   gasPrice: null,
   blocks: [],
-  isDataInitialized: false,
   newlyMinedBlockNumbers: []
 }
 
