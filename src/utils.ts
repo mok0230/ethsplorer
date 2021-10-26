@@ -55,27 +55,36 @@ export const updateGasPrice = async (state: any, dispatch: any): Promise<number>
   return gasPrice;
 }
 
-export const updateBlocks = async (state: any, dispatch: any, minBlockNum: number, maxBlockNum: number, existingBlocks: any[]): Promise<boolean> => {
+export const updateBlocks = async (state: any, dispatch: any, minBlockNum: number, maxBlockNum: number, existingBlocks: any[]) => {
+  console.log("updateBlocks")
+  console.log("minBlockNum", minBlockNum);
+  console.log("maxBlockNum", maxBlockNum);
+  console.log("existingBlocks", existingBlocks);
+
+
   dispatch("setAreBlocksUpdating", true);
 
   let minBlockNumFetched = existingBlocks[0].number;
   let maxBlockNumFetched = existingBlocks[existingBlocks.length - 1].number;
 
+  console.log("minBlockNumFetched", minBlockNumFetched);
+  console.log("maxBlockNumFetched", maxBlockNumFetched);
+
   while (minBlockNumFetched > minBlockNum) {
-    const unshiftBlockNum = minBlockNumFetched - 1
+    const unshiftBlockNum = minBlockNumFetched - 1;
+    console.log("about to unshift/add block", unshiftBlockNum)
     await addBlock(state, dispatch, unshiftBlockNum, 'unshiftBlock')
     minBlockNumFetched = unshiftBlockNum;
   }
 
   while (maxBlockNumFetched < maxBlockNum) {
     const pushBlockNum = maxBlockNumFetched + 1;
+    console.log("about to push/add block", pushBlockNum)
     await addBlock(state, dispatch, pushBlockNum, 'pushBlock')
     maxBlockNumFetched = pushBlockNum;
   }
 
   dispatch("setAreBlocksUpdating", false);
-
-  return true;
 }
 
 const addBlock = async (state: any, dispatch: any, blockNumber: number, dispatchType: 'pushBlock' | 'unshiftBlock'): Promise<any> => {

@@ -29,6 +29,7 @@ const reducer = (state, action) => {
         blocks: [action.value, ...state.blocks]
       }
     case "setAreBlocksUpdating":
+      console.log("REDUCER: setAreBlocksUpdating", action.value);
       return {
         ...state,
         areBlocksUpdating: action.value

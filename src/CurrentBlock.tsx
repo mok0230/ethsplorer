@@ -7,7 +7,10 @@ import { updateGasPrice, updateBlocks } from "./utils"
 export default function CurrentBlock() {
   const { state, dispatch } = React.useContext(AppContext) as any;
   React.useEffect(() => {
+    console.log("CurrentBlock useEffect");
     if (!state.areBlocksUpdating && state.blocks && state.blocks.length && state.minBlockNum) {
+      console.log("made it through conditional");
+      console.log("state.areBlocksUpdating", state.areBlocksUpdating);
       updateBlocks(state, dispatch, state.minBlockNum, state.maxBlockNum, state.blocks);
     }
     updateGasPrice(state, dispatch);
