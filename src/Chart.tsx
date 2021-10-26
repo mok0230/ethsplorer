@@ -8,8 +8,6 @@ import { AppContext } from './AppProvider';
 export default function Chart() {
   const { state } = React.useContext(AppContext) as any;
   const data = generateChartData(state);
-  console.log('Chart data', data)
-
   const theme = useTheme();
 
   return (

@@ -14,7 +14,6 @@ export default function BlockTable() {
   const rows = generateBlockTableData(state);
 
   const handleLoadMoreBlocks = () => {
-    console.log('handleLoadMoreBlocks')
     dispatch({ type: "updateMinBlockNum", value: state.minBlockNum - 10 });
   }
 
