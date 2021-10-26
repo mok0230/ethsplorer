@@ -1,6 +1,6 @@
 # EthSplorer
 
-This is a lightweight block explorer for the ethereum blockchain
+This project is a lightweight block explorer and gas chart interface for the Ethereum blockchain.
 
 ## Getting started
 
